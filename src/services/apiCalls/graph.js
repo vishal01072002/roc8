@@ -14,7 +14,7 @@ export const fetchGraphData = (data) => {
         console.log("GRAPH API RESPONSE \n", response);
         
         if (!response?.data?.success) {
-          throw new Error(response.data.message);
+          throw new Error(response?.data?.message);
         }
         
         toast.success("GRAPH DATA Successful");
@@ -25,7 +25,7 @@ export const fetchGraphData = (data) => {
         
       } catch (error) {
         console.log("GRAPH API ERROR............", error);
-        toast.error(error.response.data.message);
+        toast.error(error?.response?.data?.message);
       }
       
       toast.dismiss(toastId);

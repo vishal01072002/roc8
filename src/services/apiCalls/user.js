@@ -11,9 +11,9 @@ export const signup = (signupUpdated,navigate)=>{
   
       try {
         const response = await apiConnector("POST",userEndpoints.SIGNUP_API,signupUpdated);
-          // console.log("SIGNUP API RESPONSE............", response);
+          console.log("SIGNUP API RESPONSE............", response);
   
-          if(! response.data.success){
+          if(! response?.data?.success){
             throw new Error(response.data.message);
           }
   
@@ -21,7 +21,7 @@ export const signup = (signupUpdated,navigate)=>{
           navigate("/login");
       } catch (error) {
         // console.log("SIGNUP API ERROR............", error);
-        toast.error(error.data.message);
+        toast.error(error?.response?.data?.message);
         // console.log(error);
       }
       dispatch(setLoading(false));
@@ -39,19 +39,19 @@ export const signup = (signupUpdated,navigate)=>{
         const response = await apiConnector("POST",userEndpoints.LOGIN_API,data);
         console.log("LOGIN API RESPONSE \n", response);
         
-        if (!response.data.success) {
-          throw new Error(response.data.message);
+        if (!response?.data?.success) {
+          throw new Error(response?.data?.message);
         }
         
         toast.success("Login Successful");
 
         // set user info in profile slice
-        dispatch(setUserData(response.data.user));
+        dispatch(setUserData(response?.data?.user));
         navigate("/dataGraph");
         
       } catch (error) {
         console.log("LOGIN API ERROR............", error);
-        toast.error(error.response.data.message);
+        toast.error(error?.response?.data?.message);
       }
       
       toast.dismiss(toastId);
