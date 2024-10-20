@@ -2,7 +2,7 @@ import { toast } from "react-toastify"
 import {apiConnector} from "../apiConnector"
 import {userEndpoints} from "../endPoint"
 import { setLoading, setUserData} from "../../store/slices/userSlice";
-
+const dates = new Date().toISOString().split("T").at(0);
 // SIGNUP API
 export const signup = (signupUpdated,navigate)=>{
     return async(dispatch) => {
@@ -47,7 +47,7 @@ export const signup = (signupUpdated,navigate)=>{
 
         // set user info in profile slice
         dispatch(setUserData(response?.data?.user));
-        navigate("/dataGraph");
+        navigate(`/dataGraph/IsYoung/true/Gender/Male/StartDate/${dates}/EndDate/${dates}`);
         
       } catch (error) {
         console.log("LOGIN API ERROR............", error);
